@@ -7,17 +7,18 @@
     <script>
         window.addEventListener("load", () => {
             let ws = new WebSocket("ws://localhost:8080/");
-            let input = document.getElementById("input");
-            let button = document.getElementById("button");
+            let input = document.getElementById("classinput");
+            let button = document.getElementById("addClassButton");
 
             ws.onopen = () => console.log("connected");
             ws.onclose = e => console.log("disconnected", e.reason);
             ws.onerror = e => console.log("Something went wrong:", e);
             ws.onmessage = event => {
                 let json = JSON.parse(event.data);
-                let div = document.createElement("div");
-                div.innerHTML = json.msg; //bad idea
-                document.body.appendChild(div);
+                // let div = document.createElement("div");
+                // div.innerHTML = json.msg; //bad idea
+                // document.body.appendChild(div);
+                console.log(json)
             };
             button.addEventListener("click", () => {
                 ws.send(input.value);
