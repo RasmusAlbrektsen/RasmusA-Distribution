@@ -1,31 +1,115 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <script>
-            window.addEventListener("load", () => {
-                let ws = new WebSocket("ws://localhost:8080/");
-                let input  = document.getElementById("input");
-                let button = document.getElementById("button");
-                
-                ws.onopen  = () => console.log("connected");
-                ws.onclose = e => console.log("disconnected", e.reason);
-                ws.onerror = e => console.log("Something went wrong:", e);
-                ws.onmessage = event => { 
-                    let json = JSON.parse(event.data);
-                    let div  = document.createElement("div");
-                    div.innerHTML = json.msg; //bad idea
-                    document.body.appendChild(div);
-                };
-                button.addEventListener("click", () => {
-                    ws.send(input.value);
-                    input.value = "";
-                });
-            });
-        </script>
-    </head>
-    <body>
-        <input type="text" id="input">
-        <button id="button">Send</button>
-        <hr>
-    </body>
+  <head>
+    <link rel="stylesheet" type="text/css" href="mystyle.css" />
+    <style></style>
+    <script>
+      window.addEventListener("load", () => {
+        let ws = new WebSocket("ws://localhost:8080/");
+        let input = document.getElementById("input");
+        let button = document.getElementById("button");
+
+        ws.onopen = () => console.log("connected");
+        ws.onclose = e => console.log("disconnected", e.reason);
+        ws.onerror = e => console.log("Something went wrong:", e);
+        ws.onmessage = event => {
+          let json = JSON.parse(event.data);
+          let div = document.createElement("div");
+          div.innerHTML = json.msg; //bad idea
+          document.body.appendChild(div);
+        };
+        button.addEventListener("click", () => {
+          ws.send(input.value);
+          input.value = "";
+        });
+      });
+    </script>
+    
+    <script src="scripts.js"></script>
+  </head>
+  <body>
+    <div class="row">
+      <div class="top-column">
+        <h1>Assignment schedules</h1>
+      </div>
+      <div class="side-column">
+        <div style="margin: 10px">
+          <h2>Classes</h2>
+          <hr />
+          <ul id="classList">
+            <li>Software Maintenance</li>
+            <li>Distribution and Integration Technologies</li>
+            <li>Statistics and Experimental Methods</li>
+          </ul>
+          <hr />
+          <p style="margin-top: 0px; margin-bottom: 0px">Name of class</p>
+          <input type="text" id="classInput" />
+          <button id="addClassButton" style="margin-top: 5px">
+            Add class
+          </button>
+        </div>
+      </div>
+      <div class="middle-column">
+        <div style="margin: 10px">
+          <div>
+            <h2>Calendar</h2>
+            <hr />
+            <div class="whatever">
+              <table class="calendar">
+                <thread>
+                  <tr>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                    <th>Saturday</th>
+                    <th>Sunday</th>
+                  </tr>
+                </thread>
+
+                <tbody id="calendarBody"></tbody>
+              </table>
+              <div class="calendarButtons">
+                <button class="calendar-button">
+                  Previous
+                </button>
+                <button class="calendar-button">
+                  Next
+                </button>
+              </div>
+            </div>
+            <hr>
+          </div>
+          <div>
+            <input type="text" style="height: 100px; width: 300px">
+            <button id="addAppointment" style="margin-top: 5px">
+              Add appointment
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="side-column">
+        <div style="margin: 10px">
+          <h2>Deadlines</h2>
+          <hr />
+          <ul id="deadlinesList">
+            <li>Interation assigment 10th of November</li>
+            <li>Software Maintenance 18th of November</li>
+          </ul>
+          <hr />
+          <p style="margin-top: 0px; margin-bottom: 0px">
+            Deadline description
+          </p>
+          <input type="text" id="deadlinesInput" style="margin-bottom: 5px" />
+          <select>
+            <option value="volvo">Volvo</option>
+          </select>
+          <button id="addDeadlineButton" style="margin-top: 5px">
+            Add deadline
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

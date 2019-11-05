@@ -1,0 +1,81 @@
+body{
+    background-color: #f2e7ce;
+  }
+  
+  img{
+    width: 100%;
+    heigth: 100%;
+  }
+  
+  hr{
+    width: 100%;
+  }
+  
+  input{
+    width: 100%;
+  }
+  
+  
+  .side-column {
+    border-style: double;
+    //background: rgba(0,0,0,0.5);
+    //background-color: blue;
+    float: left;
+    width: 13.5%;
+    height: 100%; /* Should be removed. Only for demonstration */
+  }
+  .middle-column {
+    border-radius: 3px;
+    background-color: #ffce2e;
+    float: left;
+    width: 71%;
+    height: 100%;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
+  }
+  
+  .top-column {
+    border-radius: 3px;
+    background-color: #ffbc21;
+    float: left;
+    text-align: center;
+    color: white;
+    width: 99.5%;
+    height: 100px;
+    margin-bottom: 0.4%;
+  }
+  .calendar {
+    border-collapse: collapse;
+  }
+  th {
+    width: 20%;
+    border: 1px solid #ddd;
+  }
+  
+  .calendar-button {
+    border-radius: 14px;
+    background-color: grey;
+    color: white;
+    font-size: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  
+  .calendar-button:hover {
+    background-color: #ffce2e;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  ul {
+      list-style: none;
+      padding-left: 0;
+  }
+  
