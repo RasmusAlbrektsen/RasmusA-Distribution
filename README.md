@@ -1,4 +1,4 @@
 # Distribution_Project
 
 
-![Mockup](https://imgur.com/ttxRozF)
+![Mockup](https://github.com/Blazingsteal/Distribution_Project/blob/master/mockup.png)
