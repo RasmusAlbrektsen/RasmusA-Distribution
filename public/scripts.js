@@ -7,6 +7,7 @@ class Course {
 
 }
 
+// works lol just write it 
 console.log(markedDay);
 
 class Deadline {
