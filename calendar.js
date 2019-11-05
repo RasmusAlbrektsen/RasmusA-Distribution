@@ -38,11 +38,49 @@ function jump() {
 }
 
 function createCalendar(month, year) {
-    
-    
-    let date = new Date()
-    let firstDay = (new Date(year, month)).getDay()
-    let daysInMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0)
 
+    let firstDay = (new Date(year, month)).getDay()
+    
+    let daysInMonth = (new Date(date.getFullYear(), date.getMonth() + 1, 0)).getDate()
+
+    // The last day of the previous month when comparing to the current month.
+    let prevLastDay = (new Date(date.getFullYear(), date.getMonth(), 0)).getDate()
+
+    let calendar = document.getElementById("calendar")
+    calendar.innerHTML = "";
+
+    let dateCounter = 1
+
+    for(let i=0; i <= 5; i++) {
+        let verticalRow = document.createElement("verticalRow")
+
+        // Days from previous month, after subtracting the first day of current month
+        let prevMonthDays = prevLastDay - firstDay
+        for(let j=0; j <= 6; j++) {
+            if (i==0 && (prevMonthDays !== prevLastDay) ){
+                let dayCell = document.createElement("day")
+                let dayCellText = document.createTextNode(prevMonthDays)
+                dayCell.append(dayCellText)
+                verticalRow.append(dayCell)
+                prevMonthDays++
+            } 
+            else if (date > daysInMonth) {
+                break;
+            }
+            else {
+                let dayCell = document.createElement("day")
+                let dayCellText = document.createTextNode(dateCounter)
+                dayCell.append(dayCellText)
+                verticalRow.append(dayCell)
+                dateCounter++;
+            }
+
+        }
+
+    }
+
+}
+
+function createRows() {
 
 }
