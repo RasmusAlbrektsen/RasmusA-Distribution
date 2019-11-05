@@ -36,9 +36,21 @@ for (let i = 0; i < list2.length; i++) {
     select.add(option);
 }
 
-function addDeadline(){
+function addDeadline() {
     var input = document.getElementById('deadlineInput');
-    if(input.value.length != 0) {
+    var course = document.getElementByID('selectList');
+    if (input.value.length != 0) {
+        let d = new Deadline('markedDate', course.textContent, input)
+        var list = document.getElementById('deadlineList');
+
+
+    } else {
+        alert("Deadline description field is empty!");
+    }
+
+
+    var input = document.getElementById('deadlineInput');
+    if (input.value.length != 0) {
         var list = document.getElementById('deadlineList');
         var li = document.createElement("li");
         li.appendChild(document.createTextNode(input.value));
@@ -49,20 +61,20 @@ function addDeadline(){
     }
 }
 
-// function addClass(){
-//   var input = document.getElementById('classInput');
-//   if(input.value.length != 0){
-//     var list = document.getElementById('classList');
-//     var li = document.createElement("li");
-//     li.appendChild(document.createTextNode(input.value));
-//     list.appendChild(li);
+function addClass() {
+    var input = document.getElementById('classInput');
+    if (input.value.length != 0) {
+        var list = document.getElementById('classList');
+        var li = document.createElement("li");
+        li.appendChild(document.createTextNode(input.value));
+        list.appendChild(li);
 
-//     //Adding new class to select list
-//     var option = document.createElement("option");
-//     option.text = input.value;
-//     input.value = "";
-//     select.add(option);
-//   } else {
-//     alert("Class name field is empty!");
-//   }
-// }
+        //Adding new class to select list
+        var option = document.createElement("option");
+        option.text = input.value;
+        input.value = "";
+        select.add(option);
+    } else {
+        alert("Class name field is empty!");
+    }
+}
