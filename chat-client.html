@@ -24,8 +24,6 @@
         });
       });
     </script>
-    
-    <script src="scripts.js"></script>
   </head>
   <body>
     <div class="row">
@@ -44,15 +42,15 @@
           <hr />
           <p style="margin-top: 0px; margin-bottom: 0px">Name of class</p>
           <input type="text" id="classInput" />
-          <button id="addClassButton" style="margin-top: 5px">
+          <button class="add-button" id="addClassButton" style="margin-top: 5px" onclick="addClass()">
             Add class
           </button>
         </div>
       </div>
       <div class="middle-column">
         <div style="margin: 10px">
-          <div>
-            <h2>Calendar</h2>
+          
+            <h3 id="monthAndYear"></h3>
             <hr />
             <div class="whatever">
               <table class="calendar">
@@ -68,32 +66,33 @@
                   </tr>
                 </thread>
 
-                <tbody id="calendarBody"></tbody>
+                <tbody id="calendar"></tbody>
               </table>
               <div class="calendarButtons">
-                <button class="calendar-button">
+                <button class="calendar-button" onclick="previous()">
                   Previous
                 </button>
-                <button class="calendar-button">
+                <button class="calendar-button" onclick="next()">
                   Next
                 </button>
               </div>
-            </div>
-            <hr>
+            
+            <hr />
           </div>
           <div>
-            <input type="text" style="height: 100px; width: 300px">
-            <button id="addAppointment" style="margin-top: 5px">
+            <input id="appointmentInput" type="text" style="height: 100px; width: 300px" />
+            <button class="add-button" id="addAppointment" style="margin-top: 5px" onclick="addAppointment()">
               Add appointment
             </button>
           </div>
         </div>
       </div>
+      <script src="calendar.js"></script>
       <div class="side-column">
         <div style="margin: 10px">
           <h2>Deadlines</h2>
           <hr />
-          <ul id="deadlinesList">
+          <ul id="deadlineList">
             <li>Interation assigment 10th of November</li>
             <li>Software Maintenance 18th of November</li>
           </ul>
@@ -101,11 +100,10 @@
           <p style="margin-top: 0px; margin-bottom: 0px">
             Deadline description
           </p>
-          <input type="text" id="deadlinesInput" style="margin-bottom: 5px" />
-          <select>
-            <option value="volvo">Volvo</option>
-          </select>
-          <button id="addDeadlineButton" style="margin-top: 5px">
+          <input type="text" id="deadlineInput" style="margin-bottom: 5px" />
+          <select id="selectList" style="width: 100%"></select>
+          <script src="scripts.js"></script>
+          <button class="add-button" id="addDeadlineButton" style="margin-top: 5px" onclick="addDeadline()">
             Add deadline
           </button>
         </div>

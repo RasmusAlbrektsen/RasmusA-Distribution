@@ -1,81 +1,105 @@
 body{
-    background-color: #f2e7ce;
-  }
+  background-color: #f2e7ce;
+  font-family: Arial;
+}
+
+img{
+  width: 100%;
+  heigth: 100%;
+}
+
+hr{
+  width: 100%;
+}
+
+input{
+  width: 100%;
+  border-radius: 3px;
+}
+
+select {
+  border-radius: 3px;
+}
+
+
+.side-column {
+  border-style: double;
+  float: left;
+  width: 13.5%;
+  height: 100%; /* Should be removed. Only for demonstration */
+}
+.middle-column {
+  border-radius: 3px;
+  background-color: #ffce2e;
+  float: left;
+  width: 71%;
+  height: 100%;
+  margin-left: 0.5%;
+  margin-right: 0.5%;
+  text-align: center;
+}
+
+.top-column {
+  border-radius: 3px;
+  background-color: #ffbc21;
+  float: left;
+  text-align: center;
+  color: white;
+  width: 99.5%;
+  height: 100px;
+  margin-bottom: 0.4%;
+}
+.calendar {
+  border-collapse: collapse;
+}
+
+th {
+  background-color: grey;
+  color: white;
+  width: 5%;
+  border: 2px solid white;
+}
+
+td {
+  background-color: #e8e8e8;
+  text-align: center;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border: 2px solid white;
+}
+
+
+
+td:active {
+  background-color: white;
+}
+
+button {
+  border-radius: 14px;
+  background-color: grey;
+  color: white;
+  font-size: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   
-  img{
-    width: 100%;
-    heigth: 100%;
-  }
-  
-  hr{
-    width: 100%;
-  }
-  
-  input{
-    width: 100%;
-  }
-  
-  
-  .side-column {
-    border-style: double;
-    //background: rgba(0,0,0,0.5);
-    //background-color: blue;
-    float: left;
-    width: 13.5%;
-    height: 100%; /* Should be removed. Only for demonstration */
-  }
-  .middle-column {
-    border-radius: 3px;
-    background-color: #ffce2e;
-    float: left;
-    width: 71%;
-    height: 100%;
-    margin-left: 0.5%;
-    margin-right: 0.5%;
-  }
-  
-  .top-column {
-    border-radius: 3px;
-    background-color: #ffbc21;
-    float: left;
-    text-align: center;
-    color: white;
-    width: 99.5%;
-    height: 100px;
-    margin-bottom: 0.4%;
-  }
-  .calendar {
-    border-collapse: collapse;
-  }
-  th {
-    width: 20%;
-    border: 1px solid #ddd;
-  }
-  
-  .calendar-button {
-    border-radius: 14px;
-    background-color: grey;
-    color: white;
-    font-size: 15px;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-  }
-  
-  .calendar-button:hover {
-    background-color: #ffce2e;
-  }
-  
-  /* Clear floats after the columns */
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-  
-  ul {
-      list-style: none;
-      padding-left: 0;
-  }
-  
+}
+
+
+button:hover {
+  background-color: #ffce2e;
+}
+
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+ul {
+    list-style: none;
+    padding-left: 0;
+}
