@@ -8,10 +8,16 @@ let rawdata = fs.readFileSync('db.json');
 let db = JSON.parse(rawdata);
 console.log(db);
 
-server.get('/users/', (req, res) => res.json(db));
-server.get('/users/:id', (req, res) => {
-    if (req.params.id in db.users) {
-        res.json(db.users[req.params.id]);
+server.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+server.get('/courses/', (req, res) => res.json(db));
+server.get('/courses/:id', (req, res) => {
+    if (req.params.id in db.courses) {
+        res.json(db.courses[req.params.id]);
     } else {
         res.sendStatus(404);
     }
