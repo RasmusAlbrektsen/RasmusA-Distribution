@@ -20,18 +20,44 @@ class Deadline {
 
 }
 
-var courseArray = [];
+async function getData(url){
+    const response = await fetch(url);
+    //console.log(response.json);
+    return response.json()
+}
+
+window.onload = async function main() {
+    const data = await getData("http://localhost:8080/courses");
+    
+    //Populates Class List
+    for (var i = 0; i <data.courses.length; i ++){
+        populateClass(data.courses[i]['course-name']);
+    }
+}
+
+
+/*var courseArray = [];
+var jsondata = "jojge";
 
 fetch("http://localhost:8080/courses")
     .then(response => response.json())
+    .then(json => jsondatajson)
     .then(json => console.log(json));
+
+console.log(jsondata);*/
 
 
 var list1 = document.getElementById('classList');
 var list2 = list1.getElementsByTagName("li");
 var selectCourseList = document.getElementById('selectList');
 
-
+function populateClass(className) {
+    var newClass = document.createElement("li");
+    newClass.text = className;
+    newClass.appendChild(document.createTextNode(className));
+    classList.appendChild(newClass);
+    console.log("created course: " + className);
+}
 for (let i = 0; i < list2.length; i++) {
     var option = document.createElement("option");
     option.text = list2[i].textContent;
