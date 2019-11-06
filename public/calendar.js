@@ -3,7 +3,7 @@ let currentMonth = today.getMonth();
 let currentYear = today.getFullYear();
 let selectedYear = document.getElementById("year");
 let selectedMonth = document.getElementById("month");
-var markedDay = 'benis';
+var markedDay;
 
 let months = [
     "January",

@@ -12,13 +12,15 @@ console.log(markedDay);
 
 class Deadline {
 
-    constructor(date, course, description) {
-        this.date = date
+    constructor(day, course, description) {
+        this.day = markedDay
         this.course = course
         this.description = description
     }
 
 }
+
+
 
 fetch("data.json")
     .then(response => response.json())
@@ -38,10 +40,12 @@ for (let i = 0; i < list2.length; i++) {
 
 function addDeadline() {
     var input = document.getElementById('deadlineInput');
-    var course = document.getElementByID('selectList');
+    var course = document.getElementById('selectList')
     if (input.value.length != 0) {
-        let d = new Deadline('markedDate', course.textContent, input)
-        var list = document.getElementById('deadlineList');
+//        let d = new Deadline('markedDate', course.textContent, input)
+        //var list = document.getElementById('deadlineList');
+        d = new Deadline(markedDay, 'Software', input.value);
+        console.log(d)
 
 
     } else {
