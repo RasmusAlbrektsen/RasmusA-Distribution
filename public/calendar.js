@@ -87,9 +87,7 @@ function createCalendar(month, year) {
                 dayCell.onclick = function () {
                     if (markedDay != null) {
                         markedDay.removeAttribute("style");
-                        markedDay.removeAttribute("id");
                         markedDay = dayCell;
-                        markedDay.setAttribute("id", "ThisAreMarked");
                         console.log(markedDay);
                         markedDay.style.backgroundColor = "#ffbc21";
                     } else {
