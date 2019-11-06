@@ -22,7 +22,7 @@ class Deadline {
 
 var courseArray = [];
 
-fetch("data.json")
+fetch("http://localhost:8080/courses")
     .then(response => response.json())
     .then(json => console.log(json));
 
