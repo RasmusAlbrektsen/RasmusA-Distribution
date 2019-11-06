@@ -2,20 +2,21 @@ class Course {
 
     constructor(name) {
         this.name = name
+        this.deadlines = [];
 
     }
 
 }
 
-// works lol just write it
-console.log(markedDay);
+
 
 class Deadline {
 
-    constructor(day, course, description) {
-        this.day = markedDay
-        this.course = course
-        this.description = description
+    constructor(course, description) {
+        this.day = markedDay.textContent;
+        this.monthAndYearString = monthAndYear.textContent;
+        this.course = course;
+        this.description = description;
     }
 
 }
@@ -40,11 +41,10 @@ for (let i = 0; i < list2.length; i++) {
 
 function addDeadline() {
     var input = document.getElementById('deadlineInput');
-    var course = document.getElementById('selectList')
+    var courseList = document.getElementById('selectList')
     if (input.value.length != 0) {
-//        let d = new Deadline('markedDate', course.textContent, input)
-        //var list = document.getElementById('deadlineList');
-        d = new Deadline(markedDay, 'Software', input.value);
+        //var deadlineList = document.getElementById('deadlineList');
+        d = new Deadline(courseList.options[courseList.selectedIndex].value, input.value);
         console.log(d)
 
 
