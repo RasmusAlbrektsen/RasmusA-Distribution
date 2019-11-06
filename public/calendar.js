@@ -84,7 +84,18 @@ function createCalendar(month, year) {
                 let dayCell = document.createElement("td");
                 let dayCellText = document.createTextNode(dateCounter);
                 dayCell.append(dayCellText);
-                dayCell.onclick = function() {if(markedDay != null) {markedDay.removeAttribute("style"); markedDay = dayCell; console.log(markedDay); markedDay.style.backgroundColor = "#ffbc21";} else {markedDay = dayCell;}};
+                dayCell.onclick = function () {
+                    if (markedDay != null) {
+                        markedDay.removeAttribute("style");
+                        markedDay.removeAttribute("id");
+                        markedDay = dayCell;
+                        markedDay.setAttribute("id", "ThisAreMarked");
+                        console.log(markedDay);
+                        markedDay.style.backgroundColor = "#ffbc21";
+                    } else {
+                        markedDay = dayCell;
+                    }
+                };
                 verticalRow.append(dayCell);
                 dateCounter++;
             }
@@ -98,4 +109,5 @@ function highlight(cell) {
     console.log(cell);
 }
 
-function createRows() {}
+function createRows() {
+}
