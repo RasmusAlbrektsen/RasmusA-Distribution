@@ -1,16 +1,16 @@
 {
   "courses": [
     {
-      "course-name": "Software Engineering",
-      "deadline": ""
+      "name": "Software Engineering",
+      "deadline": []
     },
     {
-      "course-name": "Distribution and Integration",
-      "deadline": ""
+      "name": "Distribution and Integration",
+      "deadline": []
     },
     {
-      "course-name": "Expert in Teams",
-      "deadline": ""
+      "name": "Expert in Teams",
+      "deadline": []
     }
   ]
 }

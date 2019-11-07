@@ -6,7 +6,10 @@ const server = express();
 
 let rawdata = fs.readFileSync('db.json');
 let db = JSON.parse(rawdata);
+console.log(typeof(db.courses));
 console.log(db);
+
+server.use(express.json());
 
 server.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
@@ -15,13 +18,29 @@ server.use(function(req, res, next) {
 });
 
 server.get('/courses/', (req, res) => res.json(db));
+
 server.get('/courses/:id', (req, res) => {
     if (req.params.id in db.courses) {
         res.json(db.courses[req.params.id]);
     } else {
         res.sendStatus(404);
     }
-})
+});
+
+server.post('/add/course/', (req, res) => {
+    db.courses.push(req.body);
+    res.send(req.body);
+    console.log(db);
+});
+
+server.post('/add/deadline/:courseID', (req, res) =>{
+    if (req.params.courseID in db.courses) {
+        db.courses[req.params.courseID].deadlines.push(req.body);
+        console.log(db);
+    } else {
+        res.sendStatus(404);
+    }
+});
 server.listen(8080);
 
 
