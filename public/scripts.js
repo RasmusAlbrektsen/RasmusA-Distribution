@@ -42,14 +42,20 @@ async function postData(url, data) {
 }
 
 window.onload = async function main() {
-    const data = await getData(serverURL + "/courses");
-    
-    //Populates Class & Deadline Lists
-    for (var i = 0; i < data.courses.length; i ++){
-        populateClasses(data.courses[i]['name']);
-        populateDeadlines(data.courses[i]);
+    try {
+        const data = await getData(serverURL + "/courses");
+        
+        //Populates Class & Deadline Lists
+        for (var i = 0; i < data.courses.length; i ++){
+            populateClasses(data.courses[i]['name']);
+            populateDeadlines(data.courses[i]);
+        }
+        
+        populateDeadlinesDropDown();
     }
-    populateDeadlinesDropDown();
+    catch (err) {
+        alert("Server is offline!\n" + err);
+    }
 }
 
 
