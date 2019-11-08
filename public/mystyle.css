@@ -1,115 +1,116 @@
-body{
-  background-color: #f2e7ce;
-  font-family: Arial;
+body {
+    background-color: #f2e7ce;
+    font-family: Arial;
 }
 
-img{
-  width: 100%;
-  heigth: 100%;
+hr {
+    width: 100%;
 }
 
-hr{
-  width: 100%;
-}
-
-li{
+li {
     border-bottom: 1px solid grey;
     margin-bottom: 5px;
     font-size: 12px;
     padding-bottom: 5px;
 }
 
-input{
-  width: 100%;
-  border-radius: 3px;
+input {
+    width: 100%;
+    border-radius: 3px;
 }
 
 select {
-  border-radius: 3px;
+    border-radius: 3px;
 }
 
 
 .side-column {
-  border-style: double;
-  float: left;
-  width: 13.5%;
-  height: 100%; /* Should be removed. Only for demonstration */
+    border-style: double;
+    float: left;
+    width: 13.5%;
+    height: 100%; /* Should be removed. Only for demonstration */
 }
+
 .middle-column {
-  border-radius: 3px;
-  background-color: #ffce2e;
-  float: left;
-  width: 71%;
-  height: 100%;
-  margin-left: 0.5%;
-  margin-right: 0.5%;
-  text-align: center;
+    border-radius: 3px;
+    background-color: #ffce2e;
+    float: left;
+    width: 71%;
+    height: 100%;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
+    text-align: center;
 }
 
 .top-column {
-  border-radius: 3px;
-  background-color: #ffbc21;
-  float: left;
-  text-align: center;
-  color: white;
-  width: 99.5%;
-  height: 100px;
-  margin-bottom: 0.4%;
+    border-radius: 3px;
+    background-color: #ffbc21;
+    float: left;
+    text-align: center;
+    color: white;
+    width: 99.5%;
+    height: 100px;
+    margin-bottom: 0.4%;
 }
+
 .calendar {
-  border-collapse: collapse;
+    border-collapse: collapse;
+    user-select: none; /* supported by Chrome and Opera */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
 }
 
 th {
-  background-color: grey;
-  color: white;
-  width: 5%;
-  border: 2px solid white;
+    background-color: grey;
+    color: white;
+    width: 5%;
+    border: 2px solid white;
 }
 
 td {
-  background-color: #e8e8e8;
-  text-align: center;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  border: 2px solid white;
+    background-color: #e8e8e8;
+    text-align: center;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border: 2px solid white;
 }
 
 
-
 td:active {
-  background-color: white;
+    background-color: white;
 }
 
 textarea {
     width: 100%;
     resize: none;
-        
+
 }
 
 button {
-  border-radius: 14px;
-  background-color: grey;
-  color: white;
-  font-size: 15px;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  
+    border-radius: 14px;
+    background-color: grey;
+    color: white;
+    font-size: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
 }
 
 
 button:hover {
-  background-color: #ffce2e;
+    background-color: #ffce2e;
 }
 
 
 /* Clear floats after the columns */
 .row:after {
-  content: "";
-  display: table;
-  clear: both;
+    content: "";
+    display: table;
+    clear: both;
 }
 
 ul {

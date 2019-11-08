@@ -3,7 +3,7 @@ let currentMonth = today.getMonth();
 let currentYear = today.getFullYear();
 let selectedYear = document.getElementById("year");
 let selectedMonth = document.getElementById("month");
-var markedDay;
+let markedDay;
 
 let months = [
     "January",
@@ -29,16 +29,18 @@ function next() {
     }
     currentMonth = (currentMonth + 1) % 12;
     createCalendar(currentMonth, currentYear);
+    markedDay = undefined;
 }
 
 function previous() {
     if (currentMonth === 0) {
         currentYear = currentYear - 1;
         currentMonth = 11;
-    } else if (currentMonth != 0) {
+    } else if (currentMonth !== 0) {
         currentMonth = currentMonth - 1;
     }
     createCalendar(currentMonth, currentYear);
+    markedDay = undefined;
 }
 
 function jump() {
@@ -49,15 +51,15 @@ function jump() {
 }
 
 function createCalendar(month, year) {
-    let startDay = (new Date(year, month)).getDay()
+    let startDay = (new Date(year, month)).getDay();
 
     //Sets monday as 0 instead of sunday
     let mondayFirstDay = (startDay === 0 ? 6 : startDay - 1);
 
-    let daysInMonth = (new Date(year, month + 1, 0)).getDate()
+    let daysInMonth = (new Date(year, month + 1, 0)).getDate();
 
     // The last day of the previous month when comparing to the current month.
-    let prevLastDay = (new Date(year, month, 0)).getDate()
+    let prevLastDay = (new Date(year, month, 0)).getDate();
 
     let calendar = document.getElementById("calendar");
     calendar.innerHTML = "";
@@ -72,7 +74,7 @@ function createCalendar(month, year) {
         // Days from previous month, after subtracting the first day of current month
         let prevMonthDays = prevLastDay - (mondayFirstDay - 1);
         for (let j = 0; j <= 6; j++) {
-            if (i == 0 && prevMonthDays !== prevLastDay + 1) {
+            if (i === 0 && prevMonthDays !== prevLastDay + 1) {
                 let dayCell = document.createElement("td");
                 let dayCellText = document.createTextNode(prevMonthDays);
                 dayCell.append(dayCellText);
@@ -85,13 +87,22 @@ function createCalendar(month, year) {
                 let dayCellText = document.createTextNode(dateCounter);
                 dayCell.append(dayCellText);
                 dayCell.onclick = function () {
-                    if (markedDay != null) {
-                        markedDay.removeAttribute("style");
-                        markedDay = dayCell;
-                        console.log(markedDay);
-                        markedDay.style.backgroundColor = "#ffbc21";
+                    let oldMarkedDay = dayCell;
+                    if (markedDay !== undefined) {
+                        if (markedDay !== oldMarkedDay) {
+                            markedDay.removeAttribute("style");
+                            markedDay = dayCell;
+                            markedDay.style.backgroundColor = "#ffbc21";
+                            console.log(markedDay.textContent);
+                        } else {
+                            markedDay.removeAttribute("Style");
+                            markedDay = undefined;
+                            console.log("markedDay unmarked");
+                        }
                     } else {
                         markedDay = dayCell;
+                        markedDay.style.backgroundColor = "#ffbc21";
+                        console.log(markedDay);
                     }
                 };
                 verticalRow.append(dayCell);
@@ -101,11 +112,4 @@ function createCalendar(month, year) {
 
         calendar.appendChild(verticalRow);
     }
-}
-
-function highlight(cell) {
-    console.log(cell);
-}
-
-function createRows() {
 }
