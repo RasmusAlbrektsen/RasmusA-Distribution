@@ -43,13 +43,6 @@ function previous() {
     markedDay = undefined;
 }
 
-function jump() {
-    //Jumps to selected year and month
-    currentYear = parseInt(selectedYear.value);
-    currentMonth = parseInt(selectedMonth.value);
-    createCalendar(currentMonth, currentYear);
-}
-
 function createCalendar(month, year) {
     let startDay = (new Date(year, month)).getDay();
 
