@@ -36,7 +36,8 @@ server.post('/add/course/', (req, res) => {
 server.post('/add/deadline/:courseID', (req, res) =>{
     if (req.params.courseID in db.courses) {
         db.courses[req.params.courseID].deadlines.push(req.body);
-        console.log(db);
+        res.send(req.body);
+        console.log(db.courses[req.params.courseID]);
     } else {
         res.sendStatus(404);
     }
