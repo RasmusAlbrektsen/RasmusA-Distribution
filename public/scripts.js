@@ -1,7 +1,7 @@
 class Course {
 
     constructor(name) {
-        this.name = name
+        this.name = name;
         this.deadlines = [];
 
     }
@@ -23,7 +23,7 @@ class Deadline {
 
 const serverURL = "http://localhost:8080";
 
-async function getData(url){
+async function getData(url) {
     const response = await fetch(url);
     return response.json()
 }
@@ -43,40 +43,38 @@ async function postData(url, data) {
 window.onload = async function main() {
     try {
         const data = await getData(serverURL + "/courses");
-        
+
         //Populates Class & Deadline Lists
-        for (var i = 0; i < data.courses.length; i ++){
-            populateClasses(data.courses[i]['name']);
+        for (let i = 0; i < data.courses.length; i++) {
+            populateCourses(data.courses[i]['name']);
             populateDeadlines(data.courses[i]);
         }
-        
+
         populateDeadlinesDropDown();
-    }
-    catch (err) {
+    } catch (err) {
         alert("Server is offline!\n" + err);
     }
-}
+};
 
 
 var courseArray = [];
 
 
-
-var classList = document.getElementById('classList');
-var classListElements = classList.getElementsByTagName("li");
+var courseList = document.getElementById('courseList');
+var courseListElements = courseList.getElementsByTagName("li");
 var selectCourseList = document.getElementById('selectList');
 var deadlineList = document.getElementById('deadlineList');
 
-function populateClasses(className) {
-    var newClass = document.createElement("li");
-    newClass.text = className;
-    newClass.appendChild(document.createTextNode(className));
-    classList.appendChild(newClass);
+function populateCourses(courseName) {
+    var newCourse = document.createElement("li");
+    newCourse.text = courseName;
+    newCourse.appendChild(document.createTextNode(courseName));
+    courseList.appendChild(newCourse);
 }
 
 function populateDeadlines(course) {
     var deadlineArray = course.deadlines;
-    for (let i = 0; i < deadlineArray.length; i++){
+    for (let i = 0; i < deadlineArray.length; i++) {
         var newDeadline = document.createElement("li");
         newDeadline.text = course.name;
         newDeadline.appendChild(document.createTextNode(deadlineArray[i].courseName + ": "
@@ -88,10 +86,10 @@ function populateDeadlines(course) {
     }
 }
 
-function populateDeadlinesDropDown(){
-    for (let i = 0; i < classListElements.length; i++) {
+function populateDeadlinesDropDown() {
+    for (let i = 0; i < courseListElements.length; i++) {
         var option = document.createElement("option");
-        option.text = classListElements[i].textContent;
+        option.text = courseListElements[i].textContent;
         selectCourseList.add(option);
     }
 }
@@ -109,17 +107,16 @@ async function addDeadline() {
 
         //creating a new deadline
         d = new Deadline(courseList.options[courseList.selectedIndex].value, input.value);
-        for (let i = 0; i<courseArray.length; i++){
-            if (d.courseName === courseArray[i]){
+        for (let i = 0; i < courseArray.length; i++) {
+            if (d.courseName === courseArray[i]) {
                 courseArray[i].deadlines.push(d);
             }
         }
-        
+
         //Sending new course to server
         try {
             data = await postData(serverURL + "/add/deadline/" + courseList.selectedIndex, d);
-        }
-        catch (err) {
+        } catch (err) {
             console.log(err);
         }
 
@@ -127,39 +124,40 @@ async function addDeadline() {
         li.appendChild(document.createTextNode(data.courseName + ": " + data.description + " - " + data.day + "/" + data.month + "/" + data.year));
         deadlineList.appendChild(li);
         input.value = "";
+        unMark();
     }
 }
 
-async function addClass() {
-    var input = document.getElementById('classInput');
+async function addCourse() {
+    var input = document.getElementById('courseInput');
     if (input.value.length !== 0) {
-        var classList = document.getElementById('classList');
+        var courseList = document.getElementById('courseList');
         var li = document.createElement("li");
         var data;
 
         //creating a new course
         var c = new Course(input.value);
-        
+
         //Sending new course to server
         try {
             data = await postData(serverURL + "/add/course", c);
-        }
-        catch (err) {
+        } catch (err) {
             console.log(err);
         }
-        
+
 
         courseArray.push(data);
 
         //Appending the new course to the course list
         li.appendChild(document.createTextNode(data.name));
-        classList.appendChild(li);
-        
+        courseList.appendChild(li);
+
         //Adding new class to select list
         var option = document.createElement("option");
         option.text = data.name;
-        input.value = "";
         selectCourseList.add(option);
+        
+        input.value = "";
     } else {
         alert("Class name field is empty!");
     }
