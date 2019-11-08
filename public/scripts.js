@@ -13,12 +13,15 @@ class Deadline {
 
     constructor(courseName, description) {
         this.day = markedDay.textContent;
-        this.monthAndYearString = monthAndYear.textContent;
+        this.month = currentMonth + 1;
+        this.year = currentYear;
         this.courseName = courseName;
         this.description = description;
     }
 
 }
+console.log(currentMonth);
+console.log(currentYear);
 
 const serverURL = "http://localhost:8080";
 
@@ -78,10 +81,14 @@ function populateClasses(className) {
 
 function populateDeadlines(course) {
     var deadlineArray = course.deadlines;
-    for (var i = 0; i < deadlineArray.length; i++){
+    for (let i = 0; i < deadlineArray.length; i++){
         var newDeadline = document.createElement("li");
         newDeadline.text = course.name;
-        newDeadline.appendChild(document.createTextNode(deadlineArray[i].courseName + ": " + deadlineArray[i].description + " - " + deadlineArray[i].day + " " + deadlineArray[i].monthAndYearString));
+        newDeadline.appendChild(document.createTextNode(deadlineArray[i].courseName + ": "
+            + deadlineArray[i].description + " - "
+            + deadlineArray[i].day + "/"
+            + deadlineArray[i].month + "/"
+            + deadlineArray[i].year));
         deadlineList.appendChild(newDeadline);
         console.log("created deadline: " + deadlineArray[i].description);
     }
@@ -128,7 +135,7 @@ async function addDeadline() {
         }
 
         //appending the new deadline to the deadline list
-        li.appendChild(document.createTextNode(data.courseName + ": " + data.description + " - " + data.day + " " + data.monthAndYearString));
+        li.appendChild(document.createTextNode(data.courseName + ": " + data.description + " - " + data.day + "/" + data.month + "/" + data.year));
         deadlineList.appendChild(li);
         input.value = "";
     }

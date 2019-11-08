@@ -2,7 +2,29 @@
   "courses": [
     {
       "name": "Software Engineering",
-      "deadlines": []
+      "deadlines": [
+        {
+          "day": "17",
+          "month": 11,
+          "year": 2019,
+          "courseName": "Software Engineering",
+          "description": "november"
+        },
+        {
+          "day": "27",
+          "month": 12,
+          "year": 2019,
+          "courseName": "Software Engineering",
+          "description": "december"
+        },
+        {
+          "day": "21",
+          "month": 2,
+          "year": 2020,
+          "courseName": "Software Engineering",
+          "description": "feb"
+        }
+      ]
     },
     {
       "name": "Distribution and Integration",
