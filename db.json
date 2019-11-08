@@ -1,0 +1,16 @@
+{
+  "courses": [
+    {
+      "name": "Software Engineering",
+      "deadlines": []
+    },
+    {
+      "name": "Distribution and Integration",
+      "deadlines": []
+    },
+    {
+      "name": "Expert in Teams",
+      "deadlines": []
+    }
+  ]
+}
