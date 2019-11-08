@@ -87,22 +87,17 @@ function createCalendar(month, year) {
                 let dayCellText = document.createTextNode(dateCounter);
                 dayCell.append(dayCellText);
                 dayCell.onclick = function () {
-                    let oldMarkedDay = dayCell;
                     if (markedDay !== undefined) {
-                        if (markedDay !== oldMarkedDay) {
-                            markedDay.removeAttribute("style");
+                        if (markedDay !== dayCell) {
+                            unMark();
                             markedDay = dayCell;
                             markedDay.style.backgroundColor = "#ffbc21";
-                            console.log(markedDay.textContent);
                         } else {
-                            markedDay.removeAttribute("Style");
-                            markedDay = undefined;
-                            console.log("markedDay unmarked");
+                            unMark();
                         }
                     } else {
                         markedDay = dayCell;
                         markedDay.style.backgroundColor = "#ffbc21";
-                        console.log(markedDay);
                     }
                 };
                 verticalRow.append(dayCell);
@@ -111,5 +106,12 @@ function createCalendar(month, year) {
         }
 
         calendar.appendChild(verticalRow);
+    }
+}
+
+function unMark() {
+    if (markedDay !== undefined) {
+        markedDay.removeAttribute("style");
+        markedDay = undefined;
     }
 }

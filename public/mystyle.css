@@ -28,7 +28,7 @@ select {
     border-style: double;
     float: left;
     width: 13.5%;
-    height: 100%; /* Should be removed. Only for demonstration */
+    height: 100%;
 }
 
 .middle-column {
@@ -70,7 +70,7 @@ th {
 }
 
 td {
-    background-color: #e8e8e8;
+    background-color: white;
     text-align: center;
     padding-top: 4px;
     padding-bottom: 4px;

@@ -54,7 +54,7 @@ window.onload = async function main() {
     } catch (err) {
         alert("Server is offline!\n" + err);
     }
-}
+};
 
 
 var courseArray = [];
@@ -124,7 +124,7 @@ async function addDeadline() {
         li.appendChild(document.createTextNode(data.courseName + ": " + data.description + " - " + data.day + "/" + data.month + "/" + data.year));
         deadlineList.appendChild(li);
         input.value = "";
-        markedDay = undefined;
+        unMark();
     }
 }
 
