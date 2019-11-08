@@ -86,6 +86,7 @@ function createCalendar(month, year) {
                 let dayCell = document.createElement("td");
                 let dayCellText = document.createTextNode(dateCounter);
                 dayCell.append(dayCellText);
+                dayCell.classList.add("current");
                 dayCell.onclick = function () {
                     if (markedDay !== undefined) {
                         if (markedDay !== dayCell) {

@@ -70,15 +70,19 @@ th {
 }
 
 td {
-    background-color: #e8e8e8;
+    background-color: #b3b3b3;
     text-align: center;
     padding-top: 4px;
     padding-bottom: 4px;
     border: 2px solid white;
 }
 
+td.current {
+    background-color: #e8e8e8;
+}
 
-td:active {
+
+td.current:active {
     background-color: white;
 }
 
@@ -104,7 +108,6 @@ button {
 button:hover {
     background-color: #ffce2e;
 }
-
 
 /* Clear floats after the columns */
 .row:after {

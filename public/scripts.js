@@ -155,8 +155,9 @@ async function addCourse() {
         //Adding new class to select list
         var option = document.createElement("option");
         option.text = data.name;
-        input.value = "";
         selectCourseList.add(option);
+        
+        input.value = "";
     } else {
         alert("Class name field is empty!");
     }
