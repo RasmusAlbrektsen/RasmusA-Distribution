@@ -4,6 +4,9 @@ const fs = require("fs");
 const express = require("express");
 const server = express();
 
+//Use files in the public folder
+server.use(express.static('public'));
+
 let rawdata = fs.readFileSync('db.json');
 let db = JSON.parse(rawdata);
 console.log(typeof(db.courses));
