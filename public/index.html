@@ -31,21 +31,23 @@
             <h3 id="monthAndYear"></h3>
             <hr/>
             <div class="whatever">
-                <table class="calendar">
-                    <thread>
-                        <tr>
-                            <th>Monday</th>
-                            <th>Tuesday</th>
-                            <th>Wednesday</th>
-                            <th>Thursday</th>
-                            <th>Friday</th>
-                            <th>Saturday</th>
-                            <th>Sunday</th>
-                        </tr>
-                    </thread>
+                <div style="height: 200px">
+                    <table class="calendar">
+                        <thread>
+                            <tr>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                                <th>Saturday</th>
+                                <th>Sunday</th>
+                            </tr>
+                        </thread>
 
-                    <tbody id="calendar"></tbody>
-                </table>
+                        <tbody id="calendar"></tbody>
+                    </table>
+                </div>
                 <div class="calendarButtons">
                     <button class="calendar-button" onclick="previous()">
                         Previous
@@ -54,14 +56,6 @@
                         Next
                     </button>
                 </div>
-
-                <hr/>
-            </div>
-            <div>
-                <input id="appointmentInput" type="text" style="height: 100px; width: 300px"/>
-                <button class="add-button" id="addAppointment" style="margin-top: 5px" onclick="addAppointment()">
-                    Add appointment
-                </button>
             </div>
         </div>
     </div>

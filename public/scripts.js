@@ -142,7 +142,7 @@ async function addClass() {
         var data;
 
         //creating a new course
-        c = new Course(input.value);
+        var c = new Course(input.value);
         
         //Sending new course to server
         try {
