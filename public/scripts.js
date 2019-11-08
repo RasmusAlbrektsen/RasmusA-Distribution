@@ -115,7 +115,7 @@ async function addDeadline() {
 
         //Sending new course to server
         try {
-            data = await postData(serverURL + "/add/deadline/" + courseList.selectedIndex, d);
+            data = await postData(serverURL + "/courses/" + courseList.selectedIndex, d);
         } catch (err) {
             console.log(err);
         }
@@ -140,7 +140,7 @@ async function addCourse() {
 
         //Sending new course to server
         try {
-            data = await postData(serverURL + "/add/course", c);
+            data = await postData(serverURL + "/courses/", c);
         } catch (err) {
             console.log(err);
         }

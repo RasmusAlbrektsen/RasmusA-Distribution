@@ -36,14 +36,14 @@ server.get('/courses/:id', (req, res) => {
     }
 });
 
-server.post('/add/course/', (req, res) => {
+server.post('/courses/', (req, res) => {
     db.courses.push(req.body);
     writeToFile();
     res.send(req.body);
     console.log(db);
 });
 
-server.post('/add/deadline/:courseID', (req, res) =>{
+server.post('/courses/:courseID', (req, res) =>{
     if (req.params.courseID in db.courses) {
         db.courses[req.params.courseID].deadlines.push(req.body);
         writeToFile();
