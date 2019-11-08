@@ -13,15 +13,14 @@
     </div>
     <div class="side-column">
         <div style="margin: 10px">
-            <h2>Classes</h2>
+            <h2>Courses</h2>
             <hr/>
             <ul id="classList">
             </ul>
-            <hr/>
-            <p style="margin-top: 0px; margin-bottom: 0px">Name of class</p>
-            <input type="text" id="classInput"/>
+            <p style="margin-top: 0px; margin-bottom: 0px">Name of course</p>
+            <textarea id="classInput" rows="4" placeholder="Enter the name of the new course"></textarea>
             <button class="add-button" id="addClassButton" style="margin-top: 5px" onclick="addClass()">
-                Add class
+                Add Course
             </button>
         </div>
     </div>
@@ -65,11 +64,10 @@
             <hr/>
             <ul id="deadlineList">
             </ul>
-            <hr/>
             <p style="margin-top: 0px; margin-bottom: 0px">
                 Deadline description
             </p>
-            <input type="text" id="deadlineInput" style="margin-bottom: 5px"/>
+            <textarea id="deadlineInput" style="margin-bottom: 5px" rows="4" placeholder="Add a description to the deadline"></textarea>
             <select id="selectList" style="width: 100%"></select>
             <button class="add-button" id="addDeadlineButton" style="margin-top: 5px" onclick="addDeadline()">
                 Add deadline

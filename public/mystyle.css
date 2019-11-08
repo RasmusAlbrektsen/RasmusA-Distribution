@@ -12,6 +12,13 @@ hr{
   width: 100%;
 }
 
+li{
+    border-bottom: 1px solid grey;
+    margin-bottom: 5px;
+    font-size: 12px;
+    padding-bottom: 5px;
+}
+
 input{
   width: 100%;
   border-radius: 3px;
@@ -72,6 +79,12 @@ td {
 
 td:active {
   background-color: white;
+}
+
+textarea {
+    width: 100%;
+    resize: none;
+        
 }
 
 button {

@@ -1,5 +1,3 @@
-//const http = require("http");
-//const url = require("url");
 const fs = require("fs");
 const express = require("express");
 const server = express();
@@ -56,27 +54,3 @@ server.post('/add/deadline/:courseID', (req, res) =>{
     }
 });
 server.listen(8080);
-
-
-/*
-let dispatch = Object.create(null);
-dispatch.GET = (request, response) => {
-    switch (url.parse(request.url).pathname) {
-        case "/users/0":
-            response.writeHead(200, {"Content-Type": "text/json"});
-            response.end(JSON.stringify(db[0]));
-            break;
-        default:
-            response.writeHead(404, {"Content-Type": 'text/plain'});
-            response.end('WTF mate\n')
-    }
-}
-
-http.createServer((request, response) => {
-    try {dispatch[request.method] (request, response); }
-    catch (err) {
-        response.writeHead(405, {'Content-Type': 'text/plain'});
-        response.end('Method not allowed\n');
-    }
-}).listen(8080);
-*/
