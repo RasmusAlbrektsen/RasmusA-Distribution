@@ -46,7 +46,7 @@ window.onload = async function main() {
 
         //Populates Class & Deadline Lists
         for (let i = 0; i < data.courses.length; i++) {
-            populateClasses(data.courses[i]['name']);
+            populateCourses(data.courses[i]['name']);
             populateDeadlines(data.courses[i]);
         }
 
@@ -60,16 +60,16 @@ window.onload = async function main() {
 var courseArray = [];
 
 
-var classList = document.getElementById('classList');
-var classListElements = classList.getElementsByTagName("li");
+var courseList = document.getElementById('courseList');
+var courseListElements = courseList.getElementsByTagName("li");
 var selectCourseList = document.getElementById('selectList');
 var deadlineList = document.getElementById('deadlineList');
 
-function populateClasses(className) {
-    var newClass = document.createElement("li");
-    newClass.text = className;
-    newClass.appendChild(document.createTextNode(className));
-    classList.appendChild(newClass);
+function populateCourses(courseName) {
+    var newCourse = document.createElement("li");
+    newCourse.text = courseName;
+    newCourse.appendChild(document.createTextNode(courseName));
+    courseList.appendChild(newCourse);
 }
 
 function populateDeadlines(course) {
@@ -87,9 +87,9 @@ function populateDeadlines(course) {
 }
 
 function populateDeadlinesDropDown() {
-    for (let i = 0; i < classListElements.length; i++) {
+    for (let i = 0; i < courseListElements.length; i++) {
         var option = document.createElement("option");
-        option.text = classListElements[i].textContent;
+        option.text = courseListElements[i].textContent;
         selectCourseList.add(option);
     }
 }
@@ -128,10 +128,10 @@ async function addDeadline() {
     }
 }
 
-async function addClass() {
-    var input = document.getElementById('classInput');
+async function addCourse() {
+    var input = document.getElementById('courseInput');
     if (input.value.length !== 0) {
-        var classList = document.getElementById('classList');
+        var courseList = document.getElementById('courseList');
         var li = document.createElement("li");
         var data;
 
@@ -150,7 +150,7 @@ async function addClass() {
 
         //Appending the new course to the course list
         li.appendChild(document.createTextNode(data.name));
-        classList.appendChild(li);
+        courseList.appendChild(li);
 
         //Adding new class to select list
         var option = document.createElement("option");
