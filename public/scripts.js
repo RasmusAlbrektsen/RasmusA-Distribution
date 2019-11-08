@@ -20,14 +20,11 @@ class Deadline {
     }
 
 }
-console.log(currentMonth);
-console.log(currentYear);
 
 const serverURL = "http://localhost:8080";
 
 async function getData(url){
     const response = await fetch(url);
-    //console.log(response.json);
     return response.json()
 }
 
@@ -40,7 +37,6 @@ async function postData(url, data) {
         body: JSON.stringify(data)
     });
     const json = await response.json();
-    console.log('Succes:', JSON.stringify(json));
     return json;
 }
 
@@ -76,7 +72,6 @@ function populateClasses(className) {
     newClass.text = className;
     newClass.appendChild(document.createTextNode(className));
     classList.appendChild(newClass);
-    console.log("created course: " + className);
 }
 
 function populateDeadlines(course) {
@@ -90,7 +85,6 @@ function populateDeadlines(course) {
             + deadlineArray[i].month + "/"
             + deadlineArray[i].year));
         deadlineList.appendChild(newDeadline);
-        console.log("created deadline: " + deadlineArray[i].description);
     }
 }
 
@@ -103,7 +97,6 @@ function populateDeadlinesDropDown(){
 }
 
 async function addDeadline() {
-    console.log(markedDay)
     var input = document.getElementById('deadlineInput');
     var courseList = document.getElementById('selectList');
     if (input.value.length === 0) {
@@ -116,13 +109,9 @@ async function addDeadline() {
 
         //creating a new deadline
         d = new Deadline(courseList.options[courseList.selectedIndex].value, input.value);
-        console.log(courseList.length);
         for (let i = 0; i<courseArray.length; i++){
-            console.log(d.courseName);
-            console.log(courseArray[i]);
             if (d.courseName === courseArray[i]){
                 courseArray[i].deadlines.push(d);
-                console.log(courseArray[i].deadlines);
             }
         }
         
@@ -159,11 +148,9 @@ async function addClass() {
             console.log(err);
         }
         
-        console.log(data);
-        
+
         courseArray.push(data);
-        console.log(courseArray.length);
-        
+
         //Appending the new course to the course list
         li.appendChild(document.createTextNode(data.name));
         classList.appendChild(li);
