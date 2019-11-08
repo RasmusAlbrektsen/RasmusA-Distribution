@@ -12,6 +12,14 @@ let db = JSON.parse(rawdata);
 console.log(typeof(db.courses));
 console.log(db);
 
+async function writeToFile () {
+    const json = JSON.stringify(db, null, 2);
+
+        await fs.writeFile('db.json', json, (err) => {
+            if(err) throw err;
+        });
+}
+
 server.use(express.json());
 
 server.use(function(req, res, next) {
@@ -32,6 +40,7 @@ server.get('/courses/:id', (req, res) => {
 
 server.post('/add/course/', (req, res) => {
     db.courses.push(req.body);
+    writeToFile();
     res.send(req.body);
     console.log(db);
 });
@@ -39,6 +48,7 @@ server.post('/add/course/', (req, res) => {
 server.post('/add/deadline/:courseID', (req, res) =>{
     if (req.params.courseID in db.courses) {
         db.courses[req.params.courseID].deadlines.push(req.body);
+        writeToFile();
         res.send(req.body);
         console.log(db.courses[req.params.courseID]);
     } else {
