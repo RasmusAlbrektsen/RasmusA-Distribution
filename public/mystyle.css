@@ -25,10 +25,18 @@ select {
 
 
 .side-column {
-    border-style: double;
-    float: left;
-    width: 13.5%;
-    height: 100%;
+     border-style: double;
+     float: left;
+     width: 13.5%;
+     height: 100%;
+ }
+
+.label {
+    width: 100%;
+    paddingng: 12px 20px;
+    border: 2px;
+    max-width: 10px;
+
 }
 
 .middle-column {
@@ -51,6 +59,44 @@ select {
     width: 99.5%;
     height: 100px;
     margin-bottom: 0.4%;
+}
+
+.login-column {
+    overflow: hidden;
+    border-radius: 3px;
+    background-color: #ffbc21;
+    float: left;
+    text-align: center;
+    color: white;
+    width: 99.5%;
+    height: 100px;
+    margin-bottom: 0.4%;
+}
+
+.login-column-left {
+    border-radius: 3px;
+    background-color: #ffbc21;
+    float: left;
+    color: white;
+    width: 6%;
+    min-width: 110px;
+}
+
+.login-column-middle {
+    border-radius: 3px;
+    background-color: #ffbc21;
+    float: left;
+    color: white;
+    width: 90%;
+}
+
+.login-column-right {
+    border-radius: 3px;
+    background-color: #ffbc21;
+    float: right;
+    color: white;
+    width: 6%;
+    min-width: 110px;
 }
 
 .calendar {
@@ -101,7 +147,6 @@ button {
     padding-right: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
-
 }
 
 

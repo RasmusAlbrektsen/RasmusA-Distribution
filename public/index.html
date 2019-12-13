@@ -11,6 +11,24 @@
     <div class="top-column">
         <h1>HomeWorker</h1>
     </div>
+    <div class="login-column" style="horiz-align: left">
+        <div class="login-column-left">
+            <form method="post" style="width: 10%; min-width: 100px">
+            <label><b>Username</b></label>
+            <input type="text" placeholder="Enter username" name="username" id="username" required>
+
+            <label><b>Password</b></label>
+            <input type="password" placeholder="Enter password" name="password" id="password" required>
+            </form>
+        </div>
+        <div style="float: left">
+            <button onclick="login()" style="margin-top: 50%" type="login">Login</button>
+        </div>
+        <div class="login-column-right" style="vertical-align: center">
+            <label id="loggedInLabel"></label>
+            <button style="vertical-align: baseline type=logout">Log out</button>
+        </div>
+    </div>
     <div class="side-column">
         <div style="margin: 10px">
             <h2>Courses</h2>
@@ -77,6 +95,7 @@
 </div>
 <script src="calendar.js"></script>
 <script src="scripts.js"></script>
+<script src="login.js"></script>
 </body>
 
 </html>
