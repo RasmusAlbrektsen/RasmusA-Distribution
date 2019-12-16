@@ -31,16 +31,15 @@ server.use(function(req, res, next) {
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 
-const jwtSecret = expressjwt({ secret: 'this is a secret'});
+const jwtSecret = "this is my secret";
 
 function isAuthorized(req, res, next) {
     if (typeof req.headers.authorization !== "undefined") {
         let token = req.headers.authorization;
         if (token.startsWith('Bearer ')) {
-
             token = token.slice(7, token.length);
         }
-        jwt.verify(token, jwtSecret, (err, user) => {
+        jwt.verify(token, jwtSecret, (err, decoded) => {
             if (err) {
                 res.status(500).json({ error: "Not Authorized" });
                 throw new Error("Not Authorized");
@@ -56,17 +55,15 @@ function isAuthorized(req, res, next) {
 server.post('/login', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-    console.log("server side= " + username)
-    console.log("server side=" + password)
-
     for(var i in db.users) {
         var user = db.users[i];
         if (username == user.username && password == user.password) {
-            let token = jwt.sign({ id: i, username: user.username}, jwtSecret, {expiresIn: '24h'});
+            let token = jwt.sign({ username}, jwtSecret, {algorithm: 'HS256', expiresIn: '24h'});
+            console.log(token);
             res.json({
                 sucess: true,
                 err: null,
-                token
+                token: token
             });
         } else {
             res.status(401).json({
@@ -78,7 +75,7 @@ server.post('/login', (req, res) => {
     }
 });
 
-server.get('/', isAuthorized, (req, res) => {
+server.get('/signed', isAuthorized, (req, res) => {
     res.send('Authenticated');
 });
 
@@ -91,10 +88,16 @@ server.use(function (err, req, res, next) {
     }
 });
 
-/*
-server.get('/courses/', (req, res) => res.json(db));
+server.get('/users/:username/courses/', isAuthorized, (req, res) => {
+    for(var i in db.users) {
+        var user = db.users[i];
+        if (username == req.params.username) {
+            res.json(db.users[i].courses);
+        }
+    }
+});
 
-server.get('/courses/:id', (req, res) => {
+server.get('/users/:username/courses/:id', (req, res) => {
     if (req.params.id in db.courses) {
         res.json(db.courses[req.params.id]);
     } else {
@@ -102,14 +105,14 @@ server.get('/courses/:id', (req, res) => {
     }
 });
 
-server.post('/courses/', (req, res) => {
+server.post('/users/:username/courses/', (req, res) => {
     db.courses.push(req.body);
     writeToFile();
     res.send(req.body);
     console.log(db);
 });
 
-server.post('/courses/:courseID', (req, res) =>{
+server.post('/users/:username/courses/:courseID', (req, res) =>{
     if (req.params.courseID in db.courses) {
         db.courses[req.params.courseID].deadlines.push(req.body);
         writeToFile();
@@ -118,6 +121,6 @@ server.post('/courses/:courseID', (req, res) =>{
     } else {
         res.sendStatus(404);
     }
-});*/
+});
 
 server.listen(8080);

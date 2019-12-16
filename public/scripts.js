@@ -8,6 +8,13 @@ class Course {
 
 }
 
+class User {
+
+    constructor(username, password) {
+        this.username = username;
+        this.password = password;
+    }
+}
 
 class Deadline {
 
@@ -22,9 +29,17 @@ class Deadline {
 }
 
 const serverURL = "http://localhost:8080";
+const currentUser = "";
 
 async function getData(url) {
-    const response = await fetch(url);
+    var token = localStorage.getItem('token');
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Authorization' : 'Bearer ' + token,
+            'Content-Type' : 'application/json'
+        }
+    });
     return response.json()
 }
 
@@ -60,16 +75,22 @@ window.onload = async function main() {
 function loginAction() {
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
-    console.log("client side= " + username)
+    var user = new User(username, password);
+    console.log("Client side= " + username)
     console.log("Client side= " + password)
     try {
-        data = login(username, password);
+        const data = login(user);
+        localStorage.setItem('token', data.token);
+        document.getElementById("loggedInLabel").innerHTML = user.username;
+        loadCourses();
     } catch (err) {
         console.log(err);
     }
 }
 
 function login(data) {
+    console.log(data)
+    console.log(JSON.stringify(data))
     const response = fetch("/login", {
         method: 'POST',
         headers: {
@@ -80,6 +101,22 @@ function login(data) {
     return response;
 }
 
+async function loadCourses() {
+    var username = document.getElementById("loggedInLabel").textContent;
+    try {
+        const data = await getData(serverURL + "/users/" + username + "/courses");
+
+        //Populates Class & Deadline Lists
+        for (let i = 0; i < data.courses.length; i++) {
+            populateCourses(data.courses[i]['name']);
+            populateDeadlines(data.courses[i]);
+        }
+
+        populateDeadlinesDropDown();
+    } catch (err) {
+        alert("Server error\n" + err);
+    }
+}
 
 var courseArray = [];
 var courseList = document.getElementById('courseList');
