@@ -32,28 +32,29 @@ const serverURL = "http://localhost:8080";
 const currentUser = "";
 
 async function getData(url) {
-    var token = localStorage.getItem('token');
-    const response = await fetch(url, {
+    var token = JSON.parse(localStorage.getItem('token'));
+    console.log(token)
+    const response = fetch(url, {
         method: 'GET',
         headers: {
-            'Authorization' : 'Bearer ' + token,
-            'Content-Type' : 'application/json'
+            'Authorization' : 'Bearer ' + token
         }
     });
-    return response.json()
+    const json = await response.json();
+    return json;
 }
 
 async function postData(url, data) {
+    var token = JSON.parse(localStorage.getItem('token'));
     const response = await fetch(url, {
         method: 'POST',
         headers: {
-            'Authorization': 'Bearer',
+            'Authorization': 'Bearer ' + token,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
     });
-    const json = await response.json();
-    return json;
+    return = response.json();
 }
 
 window.onload = async function main() {
@@ -80,7 +81,10 @@ function loginAction() {
     console.log("Client side= " + password)
     try {
         const data = login(user);
-        localStorage.setItem('token', data.token);
+        console.log(data);
+        console.log(JSON.stringify(data))
+        localStorage.setItem('token', JSON.stringify(data));
+        console.log("from local " + localStorage.getItem('token'));
         document.getElementById("loggedInLabel").innerHTML = user.username;
         loadCourses();
     } catch (err) {
@@ -89,13 +93,12 @@ function loginAction() {
 }
 
 function login(data) {
-    console.log(data)
-    console.log(JSON.stringify(data))
     const response = fetch("/login", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
+        json: true,
         body: JSON.stringify(data)
     });
     return response;
