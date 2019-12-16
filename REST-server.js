@@ -23,8 +23,8 @@ async function writeToFile () {
 server.use(express.json());
 
 server.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Authorization");
+  res.header('Access-Control-Allow-Origin', '*'); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Headers", 'Content-Type,Authorization');
   next();
 });
 
@@ -54,7 +54,11 @@ function isAuthorized(req, res, next) {
 }
 
 server.post('/login', (req, res) => {
-    const { username, password } = req.body;
+    const username = req.body.username;
+    const password = req.body.password;
+    console.log("server side= " + username)
+    console.log("server side=" + password)
+
     for(var i in db.users) {
         var user = db.users[i];
         if (username == user.username && password == user.password) {
@@ -64,7 +68,6 @@ server.post('/login', (req, res) => {
                 err: null,
                 token
             });
-            break;
         } else {
             res.status(401).json({
                 sucess: false,
@@ -87,6 +90,7 @@ server.use(function (err, req, res, next) {
         next(err);
     }
 });
+
 /*
 server.get('/courses/', (req, res) => res.json(db));
 

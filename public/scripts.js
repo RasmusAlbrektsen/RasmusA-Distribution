@@ -32,7 +32,7 @@ async function postData(url, data) {
     const response = await fetch(url, {
         method: 'POST',
         headers: {
-            'Authorization': 'Bearer <jwt_token>',
+            'Authorization': 'Bearer',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
@@ -42,7 +42,7 @@ async function postData(url, data) {
 }
 
 window.onload = async function main() {
-    try {
+  /*  try {
         const data = await getData(serverURL + "/courses");
 
         //Populates Class & Deadline Lists
@@ -54,33 +54,32 @@ window.onload = async function main() {
         populateDeadlinesDropDown();
     } catch (err) {
         alert("Server error\n" + err);
-    }
+    }*/
 };
-async function login(url, data) {
-    const response = await fetch(url, {
+
+function loginAction() {
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+    console.log("client side= " + username)
+    console.log("Client side= " + password)
+    try {
+        data = login(username, password);
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+function login(data) {
+    const response = fetch("/login", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
     });
-    const json = await response.json();
-    return json;
+    return response;
 }
 
-function login() {
-    var username = document.getElementById("username").value;
-    var password = document.getElementById("password").value;
-
-    try {
-        data = await login(serverURL + "/login", username + password);
-    } catch (err) {
-        console.log(err);
-    }
-
-    
-
-}
 
 var courseArray = [];
 var courseList = document.getElementById('courseList');
