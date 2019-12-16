@@ -32,6 +32,7 @@ async function postData(url, data) {
     const response = await fetch(url, {
         method: 'POST',
         headers: {
+            'Authorization': 'Bearer <jwt_token>',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
@@ -52,14 +53,36 @@ window.onload = async function main() {
 
         populateDeadlinesDropDown();
     } catch (err) {
-        alert("Server is offline!\n" + err);
+        alert("Server error\n" + err);
     }
 };
+async function login(url, data) {
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+    const json = await response.json();
+    return json;
+}
 
+function login() {
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+
+    try {
+        data = await login(serverURL + "/login", username + password);
+    } catch (err) {
+        console.log(err);
+    }
+
+    
+
+}
 
 var courseArray = [];
-
-
 var courseList = document.getElementById('courseList');
 var courseListElements = courseList.getElementsByTagName("li");
 var selectCourseList = document.getElementById('selectList');

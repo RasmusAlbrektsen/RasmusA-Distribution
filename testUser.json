@@ -1,0 +1,56 @@
+{
+  "courses": [
+    {
+      "name": "Software Engineering",
+      "deadlines": [
+        {
+          "day": "22",
+          "month": 11,
+          "year": 2019,
+          "courseName": "Software Engineering",
+          "description": "Hand in assignment 2"
+        }
+      ]
+    },
+    {
+      "name": "Distribution and Integration",
+      "deadlines": [
+        {
+          "day": "9",
+          "month": 11,
+          "year": 2019,
+          "courseName": "Distribution and Integration",
+          "description": "Hand in project-prototype"
+        }
+      ]
+    },
+    {
+      "name": "Expert in Teams",
+      "deadlines": [
+        {
+          "day": "5",
+          "month": 12,
+          "year": 2019,
+          "courseName": "Expert in Teams",
+          "description": "Finish report"
+        }
+      ]
+    },
+    {
+      "name": "Statistics and Probability",
+      "deadlines": []
+    },
+    {
+      "name": "iOS Programming",
+      "deadlines": [
+        {
+          "day": "15",
+          "month": 11,
+          "year": 2019,
+          "courseName": "iOS Programming",
+          "description": "Present prototype."
+        }
+      ]
+    }
+  ]
+}
