@@ -33,19 +33,19 @@ const currentUser = "";
 
 async function getData(url) {
     var token = JSON.parse(localStorage.getItem('token'));
-    console.log(token)
+    console.log("token in getData = " + token)
     const response = fetch(url, {
         method: 'GET',
         headers: {
             'Authorization' : 'Bearer ' + token
         }
+    }).then(function(response) {
+        return response.json();
     });
-    const json = await response.json();
-    return json;
 }
 
 async function postData(url, data) {
-    var token = JSON.parse(localStorage.getItem('token'));
+    var token = localStorage.getItem('token');
     const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -53,8 +53,9 @@ async function postData(url, data) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
+    }).then(function(response) {
+       return response.json();
     });
-    return = response.json();
 }
 
 window.onload = async function main() {
@@ -80,16 +81,13 @@ function loginAction() {
     console.log("Client side= " + username)
     console.log("Client side= " + password)
     try {
-        const data = login(user);
-        console.log(data);
-        console.log(JSON.stringify(data))
-        localStorage.setItem('token', JSON.stringify(data));
-        console.log("from local " + localStorage.getItem('token'));
+        login(user);
         document.getElementById("loggedInLabel").innerHTML = user.username;
-        loadCourses();
     } catch (err) {
         console.log(err);
     }
+    loadCourses();
+    console.log(localStorage.getItem('token'))
 }
 
 function login(data) {
@@ -100,8 +98,10 @@ function login(data) {
         },
         json: true,
         body: JSON.stringify(data)
+    }).then(response => response.json()).then(response => {
+        console.log(response.token);
+        localStorage.setItem('token', response.token);
     });
-    return response;
 }
 
 async function loadCourses() {
