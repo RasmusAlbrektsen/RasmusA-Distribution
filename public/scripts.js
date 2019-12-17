@@ -52,25 +52,12 @@ async function postData(url, data) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
-    }).then(function(response) {
-       return response.json();
-    });
+    }).then(response => response.json());
+    return response;
 }
 
 window.onload = async function main() {
-  /*  try {
-        const data = await getData(serverURL + "/courses");
 
-        //Populates Class & Deadline Lists
-        for (let i = 0; i < data.courses.length; i++) {
-            populateCourses(data.courses[i]['name']);
-            populateDeadlines(data.courses[i]);
-        }
-
-        populateDeadlinesDropDown();
-    } catch (err) {
-        alert("Server error\n" + err);
-    }*/
 };
 
 function loginAction() {
@@ -174,9 +161,9 @@ async function addDeadline() {
             }
         }
 
-        //Sending new course to server
+        //Sending new deadline to server
         try {
-            data = await postData(serverURL + "/courses/" + courseList.selectedIndex, d);
+            data = await postData(serverURL + "/users/courses/" + currentUser + "/" + courseList.selectedIndex, d);
         } catch (err) {
             console.log(err);
         }
@@ -201,7 +188,7 @@ async function addCourse() {
 
         //Sending new course to server
         try {
-            data = await postData(serverURL + "/courses/", c);
+            data = await postData(serverURL + "/users/courses/" + currentUser, c);
         } catch (err) {
             console.log(err);
         }

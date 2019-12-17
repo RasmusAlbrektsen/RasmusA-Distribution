@@ -92,29 +92,45 @@ server.get('/users/courses/:username', isAuthorized, (req, res) => {
     }
 });
 
-server.get('/users/courses/:id', isAuthorized, (req, res) => {
-    if (req.params.id in db.courses) {
-        res.json(db.courses[req.params.id]);
-    } else {
-        res.sendStatus(404);
+server.get('/users/courses/:username/:id', isAuthorized, (req, res) => {
+    var username = req.params.username;
+    for (var i in db.users) {
+        var user = db.users[i];
+        if (user.username == username && req.params.id in db.users.courses) {
+            res.json(db.courses[req.params.id]);
+        } else {
+            res.sendStatus(404)
+        }
     }
 });
 
-server.post('/users/courses/', isAuthorized, (req, res) => {
-    db.courses.push(req.body);
-    writeToFile();
-    res.send(req.body);
-    console.log(db);
+server.post('/users/courses/:username', isAuthorized, (req, res) => {
+    var username = req.params.username;
+    for(var i in db.users) {
+        var user = db.users[i];
+        if (user.username == username) {
+            db.users[i].courses.push(req.body);
+            writeToFile();
+            res.send(req.body);
+            console.log(db);
+        } else {
+            res.sendStatus(404);
+        }
+    }
 });
 
-server.post('/users/:username/courses/:courseID', isAuthorized, (req, res) =>{
-    if (req.params.courseID in db.courses) {
-        db.courses[req.params.courseID].deadlines.push(req.body);
-        writeToFile();
-        res.send(req.body);
-        console.log(db.courses[req.params.courseID]);
-    } else {
-        res.sendStatus(404);
+server.post('/users/courses/:username/:courseID', isAuthorized, (req, res) =>{
+    var username = req.params.username;
+    for(var i in db.users) {
+        var user = db.users[i];
+        if (user.username == username) {
+            db.users[i].courses[req.params.courseID].deadlines.push(req.body);
+            writeToFile();
+            res.send(req.body);
+            console.log(db.users[i].courses[req.params.courseID]);
+        } else {
+            res.sendStatus(404);
+        }
     }
 });
 
