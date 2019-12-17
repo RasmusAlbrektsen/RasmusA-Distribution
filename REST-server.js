@@ -2,8 +2,9 @@ const fs = require("fs");
 const express = require("express");
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
-const expressjwt = require('express-jwt');
 const server = express();
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 //Use files in the public folder
 server.use(express.static('public'));

@@ -30,6 +30,8 @@ class Deadline {
 
 const serverURL = "http://localhost:8080";
 let currentUser = "";
+let loggedIn = false;
+let resourcesLoaded = false;
 
 async function getData(url) {
     var token = localStorage.getItem('token');
@@ -58,7 +60,7 @@ async function postData(url, data) {
 }
 
 window.onload = async function main() {
-
+    localStorage.clear();
 };
 
 async function loginAction() {
@@ -69,11 +71,11 @@ async function loginAction() {
     console.log("Client side= " + password)
     try {
         await login(user);
-        document.getElementById("loggedInLabel").innerHTML = user.username;
-        currentUser = user.username;
     } catch (err) {
         console.log(err);
     }
+    document.getElementById("username").value = "";
+    document.getElementById("password").value = "";
 }
 
 async function login(data) {
@@ -85,25 +87,32 @@ async function login(data) {
         json: true,
         body: JSON.stringify(data)
     }).then(response => response.json()).then(response => {
-        console.log("token when logged in: " + response.token);
         localStorage.setItem('token', response.token);
+        if(response.token != null) {
+            loggedIn = true;
+        }
+        document.getElementById("loggedInLabel").innerHTML = data.username;
+        currentUser = data.username;
     });
 }
 
 async function loadCourses() {
-    console.log("Current user when loading courses: " + currentUser);
-    try {
-        const data = await getData(serverURL + "/users/courses/" + currentUser);
+    if(loggedIn && resourcesLoaded == false) {
+        console.log("Current user when loading courses: " + currentUser);
+        try {
+            const data = await getData(serverURL + "/users/courses/" + currentUser);
 
-        //Populates Class & Deadline Lists
-        for (let i = 0; i < data.length; i++) {
-            populateCourses(data[i]['name']);
-            populateDeadlines(data[i]);
+            //Populates Class & Deadline Lists
+            for (let i = 0; i < data.length; i++) {
+                populateCourses(data[i]['name']);
+                populateDeadlines(data[i]);
+            }
+
+            populateDeadlinesDropDown();
+            resourcesLoaded = true;
+        } catch (err) {
+            alert(err);
         }
-
-        populateDeadlinesDropDown();
-    } catch (err) {
-        alert("Server error\n" + err);
     }
 }
 
@@ -208,5 +217,26 @@ async function addCourse() {
         input.value = "";
     } else {
         alert("Class name field is empty!");
+    }
+}
+function emptyEverything() {
+    while(courseList.firstChild) {
+        courseList.removeChild(courseList.firstChild);
+    }
+    while(deadlineList.firstChild) {
+        deadlineList.removeChild(deadlineList.firstChild);
+    }
+    while(selectCourseList.firstChild) {
+        selectCourseList.removeChild(selectCourseList.firstChild);
+    }
+}
+
+function logOut() {
+    if(loggedIn == true) {
+        localStorage.clear();
+        document.getElementById('loggedInLabel').innerHTML = "";
+        resourcesLoaded = false;
+        emptyEverything();
+        alert("Logged out");
     }
 }
