@@ -24,7 +24,7 @@ server.use(express.json());
 
 server.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*'); // update to match the domain you will make the request from
-  res.header("Access-Control-Allow-Headers", 'Authorization');
+  res.header("Access-Control-Allow-Headers", 'Content-Type: application/json');
   next();
 });
 
@@ -86,16 +86,17 @@ server.use(function (err, req, res, next) {
     }
 });
 
-server.get('/users/:username/courses/', isAuthorized, (req, res) => {
+server.get('/users/courses/:username', isAuthorized, (req, res) => {
+    var username = req.params.username;
     for(var i in db.users) {
         var user = db.users[i];
-        if (username == req.params.username) {
+        if (user.username == username) {
             res.json(db.users[i].courses);
         }
     }
 });
 
-server.get('/users/:username/courses/:id', (req, res) => {
+server.get('/users/courses/:id', isAuthorized, (req, res) => {
     if (req.params.id in db.courses) {
         res.json(db.courses[req.params.id]);
     } else {
@@ -103,7 +104,7 @@ server.get('/users/:username/courses/:id', (req, res) => {
     }
 });
 
-server.post('/users/:username/courses/', (req, res) => {
+server.post('/users/courses/', (req, res) => {
     db.courses.push(req.body);
     writeToFile();
     res.send(req.body);

@@ -29,18 +29,20 @@ class Deadline {
 }
 
 const serverURL = "http://localhost:8080";
-const currentUser = "";
+let currentUser = "";
 
 async function getData(url) {
-    var token = JSON.parse(localStorage.getItem('token'));
+    var token = localStorage.getItem('token');
     console.log("token in getData = " + token)
-    const response = fetch(url, {
+    const response = await fetch(url, {
         method: 'GET',
         headers: {
             'Authorization' : 'Bearer ' + token
         }
     }).then(function(response) {
         return response.json();
+    }).then(function (response) {
+        console.log(response)
     });
 }
 
@@ -83,11 +85,11 @@ function loginAction() {
     try {
         login(user);
         document.getElementById("loggedInLabel").innerHTML = user.username;
+        currentUser = user.username;
+        loadCourses();
     } catch (err) {
         console.log(err);
     }
-    loadCourses();
-    console.log(localStorage.getItem('token'))
 }
 
 function login(data) {
@@ -105,10 +107,10 @@ function login(data) {
 }
 
 async function loadCourses() {
-    var username = document.getElementById("loggedInLabel").textContent;
+    console.log("Current user when loading courses: " + currentUser);
     try {
-        const data = await getData(serverURL + "/users/" + username + "/courses");
-
+        const data = await getData(serverURL + "/users/courses/" + currentUser);
+        console.log("data in load: " + data);
         //Populates Class & Deadline Lists
         for (let i = 0; i < data.courses.length; i++) {
             populateCourses(data.courses[i]['name']);
