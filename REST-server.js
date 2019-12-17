@@ -73,10 +73,6 @@ server.post('/login', (req, res) => {
     }
 });
 
-server.get('/signed', isAuthorized, (req, res) => {
-    res.send('Authenticated');
-});
-
 server.use(function (err, req, res, next) {
     if (err.name === 'UnauthorizedError') {
         res.status(401).send(err);
@@ -104,14 +100,14 @@ server.get('/users/courses/:id', isAuthorized, (req, res) => {
     }
 });
 
-server.post('/users/courses/', (req, res) => {
+server.post('/users/courses/', isAuthorized, (req, res) => {
     db.courses.push(req.body);
     writeToFile();
     res.send(req.body);
     console.log(db);
 });
 
-server.post('/users/:username/courses/:courseID', (req, res) =>{
+server.post('/users/:username/courses/:courseID', isAuthorized, (req, res) =>{
     if (req.params.courseID in db.courses) {
         db.courses[req.params.courseID].deadlines.push(req.body);
         writeToFile();

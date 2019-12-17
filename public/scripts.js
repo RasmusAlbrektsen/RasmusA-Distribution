@@ -34,21 +34,18 @@ let currentUser = "";
 async function getData(url) {
     var token = localStorage.getItem('token');
     console.log("token in getData = " + token)
-    const response = await fetch(url, {
+    const response = fetch(url, {
         method: 'GET',
         headers: {
             'Authorization' : 'Bearer ' + token
         }
-    }).then(function(response) {
-        return response.json();
-    }).then(function (response) {
-        console.log(response)
-    });
+    }).then(response => response.json());
+    return response;
 }
 
 async function postData(url, data) {
     var token = localStorage.getItem('token');
-    const response = await fetch(url, {
+    const response = fetch(url, {
         method: 'POST',
         headers: {
             'Authorization': 'Bearer ' + token,
@@ -110,11 +107,11 @@ async function loadCourses() {
     console.log("Current user when loading courses: " + currentUser);
     try {
         const data = await getData(serverURL + "/users/courses/" + currentUser);
-        console.log("data in load: " + data);
+
         //Populates Class & Deadline Lists
-        for (let i = 0; i < data.courses.length; i++) {
-            populateCourses(data.courses[i]['name']);
-            populateDeadlines(data.courses[i]);
+        for (let i = 0; i < data.length; i++) {
+            populateCourses(data[i]['name']);
+            populateDeadlines(data[i]);
         }
 
         populateDeadlinesDropDown();
