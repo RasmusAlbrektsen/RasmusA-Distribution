@@ -10,7 +10,6 @@ server.use(express.static('public'));
 
 let rawdata = fs.readFileSync('db.json');
 let db = JSON.parse(rawdata);
-console.log(typeof(db.courses));
 
 async function writeToFile () {
     const json = JSON.stringify(db, null, 2);
@@ -35,7 +34,7 @@ const jwtSecret = "this is my secret";
 
 function isAuthorized(req, res, next) {
     if (typeof req.headers.authorization !== "undefined") {
-        let token = req.headers.authorization;
+        var token = req.headers.authorization;
         if (token.startsWith('Bearer ')) {
             token = token.slice(7, token.length);
             console.log("Token to authorize " + token)
@@ -54,31 +53,17 @@ function isAuthorized(req, res, next) {
 }
 
 server.post('/login', (req, res) => {
-    const username = req.body.username;
-    const password = req.body.password;
+    var username = req.body.username;
+    var password = req.body.password;
     for(var i in db.users) {
         var user = db.users[i];
+        console.log("checking user: " + user.username + " with " + req.body.username)
+        console.log("checking password: " + user.password + " with " + req.body.password)
         if (username == user.username && password == user.password) {
-            var token = jwt.sign({ username: user.username }, jwtSecret, {algorithm: 'HS256', expiresIn: '24hr'});
-            console.log("Log from post in server = " + token);
+            var token = jwt.sign({ username: user.username }, jwtSecret, {algorithm: 'HS256', expiresIn: '1hr'});
             res.status(200).send({ auth: true, token: token });
             break;
-        } else {
-            res.status(401).json({
-                sucess: false,
-                token: null,
-                err: "Incorrect username or password"
-            });
         }
-    }
-});
-
-server.use(function (err, req, res, next) {
-    if (err.name === 'UnauthorizedError') {
-        res.status(401).send(err);
-    }
-    else {
-        next(err);
     }
 });
 

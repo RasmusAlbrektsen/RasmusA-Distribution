@@ -37,7 +37,8 @@ async function getData(url) {
     const response = fetch(url, {
         method: 'GET',
         headers: {
-            'Authorization' : 'Bearer ' + token
+            'Authorization' : 'Bearer ' + token,
+            'Content-Type': 'application/json'
         }
     }).then(response => response.json());
     return response;
@@ -60,23 +61,22 @@ window.onload = async function main() {
 
 };
 
-function loginAction() {
+async function loginAction() {
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
     var user = new User(username, password);
     console.log("Client side= " + username)
     console.log("Client side= " + password)
     try {
-        login(user);
+        await login(user);
         document.getElementById("loggedInLabel").innerHTML = user.username;
         currentUser = user.username;
-        loadCourses();
     } catch (err) {
         console.log(err);
     }
 }
 
-function login(data) {
+async function login(data) {
     const response = fetch("/login", {
         method: 'POST',
         headers: {
@@ -85,7 +85,7 @@ function login(data) {
         json: true,
         body: JSON.stringify(data)
     }).then(response => response.json()).then(response => {
-        console.log(response.token);
+        console.log("token when logged in: " + response.token);
         localStorage.setItem('token', response.token);
     });
 }

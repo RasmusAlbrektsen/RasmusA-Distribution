@@ -1,8 +1,8 @@
 {
   "users": [
     {
-      "username": "testUser",
-      "password": "password",
+      "username": "lars",
+      "password": "kode",
       "courses": [
         {
           "name": "Software Engineering",
@@ -90,8 +90,93 @@
       ]
     },
     {
-      "username": "otherUser",
-      "password": "otherpassword"
+      "username": "testUser",
+      "password": "password",
+      "courses": [
+        {
+          "name": "Software Engineering",
+          "deadlines": [
+            {
+              "day": "22",
+              "month": 11,
+              "year": 2019,
+              "courseName": "Software Engineering",
+              "description": "Hand in assignment 2"
+            },
+            {
+              "day": "21",
+              "month": 12,
+              "year": 2019,
+              "courseName": "Software Engineering",
+              "description": "New assignment."
+            }
+          ]
+        },
+        {
+          "name": "Distribution and Integration",
+          "deadlines": [
+            {
+              "day": "9",
+              "month": 11,
+              "year": 2019,
+              "courseName": "Distribution and Integration",
+              "description": "Hand in project-prototype"
+            }
+          ]
+        },
+        {
+          "name": "Expert in Teams",
+          "deadlines": [
+            {
+              "day": "5",
+              "month": 12,
+              "year": 2019,
+              "courseName": "Expert in Teams",
+              "description": "Finish report"
+            }
+          ]
+        },
+        {
+          "name": "Statistics and Probability",
+          "deadlines": [
+            {
+              "day": "3",
+              "month": 1,
+              "year": 2020,
+              "courseName": "Statistics and Probability",
+              "description": "Exam."
+            }
+          ]
+        },
+        {
+          "name": "iOS Programming",
+          "deadlines": [
+            {
+              "day": "15",
+              "month": 11,
+              "year": 2019,
+              "courseName": "iOS Programming",
+              "description": "Present prototype."
+            }
+          ]
+        },
+        {
+          "name": "Bachelor Project",
+          "deadlines": []
+        },
+        {
+          "name": "Android Programming",
+          "deadlines": [
+            {
+              "day": "3",
+              "month": 2,
+              "year": 2020,
+              "courseName": "Android Programming",
+              "description": "Introduction"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
