@@ -64,18 +64,22 @@ window.onload = async function main() {
 };
 
 async function loginAction() {
-    var username = document.getElementById("username").value;
-    var password = document.getElementById("password").value;
-    var user = new User(username, password);
-    console.log("Client side= " + username)
-    console.log("Client side= " + password)
-    try {
-        await login(user);
-    } catch (err) {
-        console.log(err);
+    if(document.getElementById('loggedInLabel').innerHTML == "") {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        var user = new User(username, password);
+        console.log("Client side= " + username)
+        console.log("Client side= " + password)
+        try {
+            await login(user);
+        } catch (err) {
+            console.log(err);
+        }
+        document.getElementById("username").value = "";
+        document.getElementById("password").value = "";
+    } else {
+        alert("A user is already logged in!")
     }
-    document.getElementById("username").value = "";
-    document.getElementById("password").value = "";
 }
 
 async function login(data) {
