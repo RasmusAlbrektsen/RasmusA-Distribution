@@ -2,7 +2,7 @@
   "users": [
     {
       "username": "lars",
-      "password": "kode",
+      "password": "$2a$10$se5dzaX1J/3RSZwbw3QbNeKhqJnVvqhL56EYWHfgXpOyevXP5wKL.",
       "courses": [
         {
           "name": "Software Engineering",
@@ -91,7 +91,7 @@
     },
     {
       "username": "testUser",
-      "password": "password",
+      "password": "$2a$10$dHtn1yjpOH4LKOjaHPgbDOJut0IoAAXw69cPQvFPny6jRX5TyvtS2",
       "courses": [
         {
           "name": "Software Engineering",

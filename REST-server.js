@@ -3,11 +3,15 @@ const express = require("express");
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const server = express();
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const saltRounds = 10;
 
 //Use files in the public folder
 server.use(express.static('public'));
+
+console.log("password = " + bcrypt.hashSync("password", saltRounds));
+
+console.log("kode = " + bcrypt.hashSync("kode", saltRounds));
 
 let rawdata = fs.readFileSync('db.json');
 let db = JSON.parse(rawdata);
@@ -58,12 +62,9 @@ server.post('/login', (req, res) => {
     var password = req.body.password;
     for(var i in db.users) {
         var user = db.users[i];
-        console.log("checking user: " + user.username + " with " + req.body.username)
-        console.log("checking password: " + user.password + " with " + req.body.password)
-        if (username == user.username && password == user.password) {
-            var token = jwt.sign({ username: user.username }, jwtSecret, {algorithm: 'HS256', expiresIn: '1hr'});
-            res.status(200).send({ auth: true, token: token });
-            break;
+        if (username == user.username && bcrypt.compareSync(password, user.password)) {
+                var token = jwt.sign({ username: user.username }, jwtSecret, {algorithm: 'HS256', expiresIn: '1hr'});
+                res.status(200).send({ auth: true, token: token });
         }
     }
 });
