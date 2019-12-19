@@ -102,9 +102,9 @@ async function login(data) {
 
 async function loadCourses() {
     if(loggedIn && resourcesLoaded == false) {
-        console.log("Current user when loading courses: " + currentUser);
+        emptyEverything();
         try {
-            const data = await getData(serverURL + "/users/courses/" + currentUser);
+            const data = await getData(serverURL + "/users/" + currentUser + "/courses");
 
             //Populates Class & Deadline Lists
             for (let i = 0; i < data.length; i++) {
@@ -176,7 +176,8 @@ async function addDeadline() {
 
         //Sending new deadline to server
         try {
-            data = await postData(serverURL + "/users/courses/" + currentUser + "/" + courseList.selectedIndex, d);
+            data = await postData(serverURL + "/users/" + currentUser + "/courses/"
+            + courseList.selectedIndex + "/deadlines", d);
         } catch (err) {
             console.log(err);
         }
@@ -201,7 +202,7 @@ async function addCourse() {
 
         //Sending new course to server
         try {
-            data = await postData(serverURL + "/users/courses/" + currentUser, c);
+            data = await postData(serverURL + "/users/" + currentUser + "/courses", c);
         } catch (err) {
             console.log(err);
         }

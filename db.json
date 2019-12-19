@@ -86,6 +86,26 @@
               "description": "Introduction"
             }
           ]
+        },
+        {
+          "name": "Software Maintenance",
+          "deadlines": []
+        },
+        {
+          "name": "Computer Science",
+          "deadlines": []
+        },
+        {
+          "name": "Exams",
+          "deadlines": [
+            {
+              "day": "26",
+              "month": 12,
+              "year": 2019,
+              "courseName": "Exams",
+              "description": "Remember to go to the exams."
+            }
+          ]
         }
       ]
     },
